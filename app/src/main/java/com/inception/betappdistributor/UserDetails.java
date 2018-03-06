@@ -1,12 +1,14 @@
 package com.inception.betappdistributor;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserDetails extends AppCompatActivity implements View.OnClickListener {
-    Boolean check = false;
-    Button add50, add100, add500, add1000, add5000, add10000, add50000, minus1000, minus5000, minus10000;
+    Button block,add50, add100, add500, add1000, add5000, add10000, add50000, minus1000, minus5000, minus10000;
     TextView balance,name;
-    String username1;
+    EditText change_password;
+    String username1,block_status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         getSupportActionBar().setHomeButtonEnabled(true);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        change_password=findViewById(R.id.change_password);
         name = findViewById(R.id.name_txt);
         add50 = findViewById(R.id.add50);
         add100 = findViewById(R.id.add100);
@@ -56,13 +58,22 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         minus1000.setOnClickListener(this);
         minus5000.setOnClickListener(this);
         minus10000.setOnClickListener(this);
-
-
+        block=findViewById(R.id.block_button);
         username1 = getIntent().getStringExtra("name");
+        block_status =getIntent().getStringExtra("status");
         name.setText(username1);
+        if (block_status.equals("1"))
+        {
+            block.setText("Block");
+        }
+        else
+            block.setText("Unblock");
+
         balance= findViewById(R.id.balance);
         balance.setText(getIntent().getStringExtra("balance"));
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,7 +91,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.add50:
-                
+
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -150,8 +161,8 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
                 AlertDialog.Builder ab = new AlertDialog.Builder(this);
                 ab.setMessage("do you want to add 50 balance?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
-            
-            break;
+
+                break;
             case R.id.add100:
                 DialogInterface.OnClickListener dialogClickListener1 = new DialogInterface.OnClickListener() {
                     @Override
@@ -299,7 +310,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.add1000:
                 DialogInterface.OnClickListener dialogClickListener3 = new DialogInterface.OnClickListener() {
-                   @Override
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
@@ -812,57 +823,57 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
-        JSONObject jsonObject = new JSONObject();
+                        JSONObject jsonObject = new JSONObject();
 
-        try {
-            jsonObject.put("module", "delete_user");
-            jsonObject.put("username" , name.getText().toString());
+                        try {
+                            jsonObject.put("module", "delete_user");
+                            jsonObject.put("username" , name.getText().toString());
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
 
-                System.out.println(response);
+                                System.out.println(response);
 
-                try {
+                                try {
 
-                    if (response.getString("result").equals("done")) {
-
-
-
-                        Toast.makeText(UserDetails.this , "user deleted successfully" , Toast.LENGTH_SHORT).show();
-finish();
-
-                    } else {
-
-                        Toast.makeText(UserDetails.this , "error try again" , Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                                    if (response.getString("result").equals("done")) {
 
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-                System.out.println(error);
+                                        Toast.makeText(UserDetails.this , "user deleted successfully" , Toast.LENGTH_SHORT).show();
+                                        finish();
+
+                                    } else {
+
+                                        Toast.makeText(UserDetails.this , "error try again" , Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
 
-            }
-        });
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
 
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 ,2 ,2 ));
+                                System.out.println(error);
 
-        Volley.newRequestQueue(UserDetails.this).add(jsonObjectRequest);
 
-        break;
+                            }
+                        });
+
+                        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 ,2 ,2 ));
+
+                        Volley.newRequestQueue(UserDetails.this).add(jsonObjectRequest);
+
+                        break;
                     case DialogInterface.BUTTON_NEGATIVE:
                         dialog.dismiss();
                         break;
@@ -899,18 +910,32 @@ finish();
 
                                 try {
 
-                                    if (response.getString("result").equals("done")) {
+                                    if (response.getString("result").equals("block_done")) {
 
 
+                                        Toast.makeText(UserDetails.this, "user blocked", Toast.LENGTH_SHORT).show();
+                                        block.setText("Unblock");
 
-                                        Toast.makeText(UserDetails.this , "user blocked" , Toast.LENGTH_SHORT).show();
-                                        finish();
 
-                                    } else {
-
-                                        Toast.makeText(UserDetails.this , "error try again" , Toast.LENGTH_SHORT).show();
                                     }
+                                    if(response.getString("result").equals("block_not_done"))
+                                    {
 
+                                        Toast.makeText(UserDetails.this, "error try again", Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (response.getString("result").equals("unblock_done")) {
+
+
+                                        Toast.makeText(UserDetails.this, "user unblocked", Toast.LENGTH_SHORT).show();
+                                        block.setText("Block");
+
+
+                                    }
+                                    if(response.getString("result").equals("unblock_not_done"))
+                                    {
+
+                                        Toast.makeText(UserDetails.this, "error try again", Toast.LENGTH_SHORT).show();
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -939,8 +964,84 @@ finish();
             }
         };
         AlertDialog.Builder ab9 = new AlertDialog.Builder(this);
-        ab9.setMessage("do you want to block user?").setPositiveButton("Yes", dialogClickListener9)
+        ab9.setMessage("Are You sure?").setPositiveButton("Yes", dialogClickListener9)
                 .setNegativeButton("No", dialogClickListener9).show();
 
+    }
+
+    public void change_pass(View view) {
+        final String pass = change_password.getText().toString();
+        if (pass.equals(""))
+        {
+            Toast.makeText(UserDetails.this, "enter password", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            DialogInterface.OnClickListener dialogClickListener9 = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            JSONObject jsonObject = new JSONObject();
+
+                            try {
+                                jsonObject.put("module", "change_password");
+                                jsonObject.put("username", name.getText().toString());
+                                jsonObject.put("password", pass);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+
+                                    System.out.println(response);
+
+                                    try {
+
+                                        if (response.getString("result").equals("done")) {
+
+
+                                            Toast.makeText(UserDetails.this, "password changed successfully", Toast.LENGTH_SHORT).show();
+                                            finish();
+
+                                        } else {
+
+                                            Toast.makeText(UserDetails.this, "error try again", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                    System.out.println(error);
+
+
+                                }
+                            });
+
+                            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
+
+                            Volley.newRequestQueue(UserDetails.this).add(jsonObjectRequest);
+
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            dialog.dismiss();
+                            break;
+                    }
+
+                }
+            };
+            AlertDialog.Builder ab9 = new AlertDialog.Builder(this);
+            ab9.setMessage("Do you want to change password?").setPositiveButton("Yes", dialogClickListener9)
+                    .setNegativeButton("No", dialogClickListener9).show();
+        }
     }
 }

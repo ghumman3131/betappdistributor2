@@ -1,23 +1,39 @@
- <LinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inception.betappdistributor.fragments.AllUsers"
     android:padding="10dp"
     android:orientation="vertical">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Create New User "
-        android:background="@drawable/rounded_button"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:layout_marginTop="10dp"
-        android:id="@+id/create_user"/>
-
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Create New User "
+            android:background="@drawable/rounded_button"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:id="@+id/create_user"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Balance"
+            android:layout_margin="20dp"
+            android:layout_toLeftOf="@+id/bal_txt"
+            android:textColor="#111"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bal_txt"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:text="00"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -102,4 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler"></android.support.v7.widget.RecyclerView>
+
+
+
 </LinearLayout>
