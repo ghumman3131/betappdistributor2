@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.inception.betappdistributor.MatchOddDetails;
 import com.inception.betappdistributor.R;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -121,26 +123,26 @@ public class ShowFragments extends Fragment {
 
                 holder.match_vs.setText(jsonObject.getString("name"));
                 holder.date_time.setText(getDate(jsonObject.getString("openDate")));
-holder.block_status.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        if(check==true)
-        {
-            holder.block_status.setText("BLOCK");
-            check=!check;
-            holder.cell_layout.setAlpha(1);
-            block="no";
-            holder.block_status.setBackgroundColor(Color.RED);
-        }
-        else {
-            holder.block_status.setText("SHOW");
-            check=!check;
-            holder.cell_layout.setAlpha((float) 0.7);
-            holder.block_status.setBackgroundColor(Color.GREEN);
-            block="yes";
-        }
-    }
-});
+                holder.block_status.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(check==true)
+                        {
+                            holder.block_status.setText("BLOCK");
+                            check=!check;
+                            holder.cell_layout.setAlpha(1);
+                            block="no";
+                            holder.block_status.setBackgroundColor(Color.RED);
+                        }
+                        else {
+                            holder.block_status.setText("SHOW");
+                            check=!check;
+                            holder.cell_layout.setAlpha((float) 0.7);
+                            holder.block_status.setBackgroundColor(Color.GREEN);
+                            block="yes";
+                        }
+                    }
+                });
 
                 holder.match_vs.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -174,7 +176,7 @@ holder.block_status.setOnClickListener(new View.OnClickListener() {
     private class view_holder extends RecyclerView.ViewHolder
     {
         TextView match_vs , date_time , open_status,block_status;
-RelativeLayout cell_layout;
+        RelativeLayout cell_layout;
         public view_holder(View itemView)
         {
             super(itemView);
