@@ -123,8 +123,15 @@ public class AllUsers extends Fragment {
     private void get_total() {
         final JSONObject jsonObject = new JSONObject();
 
+        SharedPreferences sp = getActivity().getSharedPreferences("user_info" , MODE_PRIVATE);
+
+
+
+
+
         try {
             jsonObject.put("module", "total_balance");
+            jsonObject.put("dis_id" ,  sp.getString("distributor_id", ""));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -208,7 +215,7 @@ public class AllUsers extends Fragment {
 
                             progress.show();
                             block(holder.isactive, jsonObject.getString("username"));
-                            get_users();
+
                         } catch (Exception e) {
                         }
                     }
@@ -247,32 +254,9 @@ public class AllUsers extends Fragment {
 
                 System.out.println(response);
 
-                try {
+
                     progress.hide();
-                    if (response.getString("result").equals("block_done")) {
-
-
-                        Toast.makeText(getActivity(), "user blocked", Toast.LENGTH_SHORT).show();
-
-                        active_dot.setImageDrawable(getResources().getDrawable(R.drawable.block_user));
-                    }
-                    if (response.getString("result").equals("block_not_done")) {
-
-                        Toast.makeText(getActivity(), "error try again", Toast.LENGTH_SHORT).show();
-                    }
-                    if (response.getString("result").equals("unblock_done")) {
-
-
-                        Toast.makeText(getActivity(), "user unblocked", Toast.LENGTH_SHORT).show();
-                        active_dot.setImageDrawable(getResources().getDrawable(R.drawable.active_user));
-                    }
-                    if (response.getString("result").equals("unblock_not_done")) {
-
-                        Toast.makeText(getActivity(), "error try again", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                   get_users();
 
 
             }
