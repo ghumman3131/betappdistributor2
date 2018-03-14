@@ -63,7 +63,7 @@ public class AllUsers extends Fragment {
         create_user = v.findViewById(R.id.create_user);
         bal_txt=v.findViewById(R.id.bal_txt);
         SharedPreferences sp = this.getActivity().getSharedPreferences("user_info" , MODE_PRIVATE);
-        saved_id = sp.getString("distributor_id","");
+        saved_id = sp.getString("id","");
         progress = new ProgressDialog(getActivity());
         progress.setTitle("Loading");
         create_user.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +125,7 @@ public class AllUsers extends Fragment {
 
         try {
             jsonObject.put("module", "total_balance");
+            jsonObject.put("dis_id", saved_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }

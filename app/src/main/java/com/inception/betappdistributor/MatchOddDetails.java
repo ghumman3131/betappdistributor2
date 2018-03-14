@@ -33,6 +33,9 @@ public class MatchOddDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+
         team_1 = findViewById(R.id.team_1);
         team_2 = findViewById(R.id.team_2);
 
