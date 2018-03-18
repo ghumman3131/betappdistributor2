@@ -34,6 +34,7 @@
         <activity android:name="com.inception.betappdistributor.CreateUser" />
         <activity android:name="com.inception.betappdistributor.UserDetails" />
         <activity android:name="com.inception.betappdistributor.Markets"></activity>
+        <activity android:name="com.inception.betappdistributor.messages"></activity>
     </application>
 
 </manifest>

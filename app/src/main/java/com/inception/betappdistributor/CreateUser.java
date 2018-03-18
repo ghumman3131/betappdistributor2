@@ -31,7 +31,7 @@ public class CreateUser extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         SharedPreferences sp = getSharedPreferences("user_info" , MODE_PRIVATE);
-        saved_id = sp.getString("distributor_id","");
+        saved_id = sp.getString("id","");
         username_et = findViewById(R.id.username_et);
         password_et = findViewById(R.id.password_et);
         limit_et = findViewById(R.id.limit_et);

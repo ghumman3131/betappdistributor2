@@ -211,6 +211,7 @@ public class LoginActivity extends AppCompatActivity  {
 
                         sp.putString("password" , mPasswordView.getText().toString());
                         sp.putString("distributor_id", response.getString("disid"));
+                        sp.putString("id", response.getString("id"));
                         sp.commit();
 
                         Intent i = new Intent(LoginActivity.this , HomeActivity.class);
