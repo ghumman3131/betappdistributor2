@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://C:\Users\Mohit pal\AndroidStudioProjects\betApp-master\BettingAdmin.iml" filepath="C:\Users\Mohit pal\AndroidStudioProjects\betApp-master\BettingAdmin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+
       <module fileurl="file://$PROJECT_DIR$/betappdistributor2.iml" filepath="$PROJECT_DIR$/betappdistributor2.iml" />
       <module fileurl="file://C:\Users\Mohit pal\Desktop\betappdistributor2\betappdistributor2-master.iml" filepath="C:\Users\Mohit pal\Desktop\betappdistributor2\betappdistributor2-master.iml" />
     </modules>
