@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.inception.betappdistributor.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,16 +25,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.inception.betappdistributor.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name="com.inception.betappdistributor.HomeActivity"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name="com.inception.betappdistributor.MatchOddDetails" />
-        <activity android:name="com.inception.betappdistributor.CreateUser" />
-        <activity android:name="com.inception.betappdistributor.UserDetails" />
-        <activity android:name="com.inception.betappdistributor.Markets"></activity>
-        <activity android:name="com.inception.betappdistributor.messages"></activity>
+        <activity android:name=".MatchOddDetails" />
+        <activity android:name=".CreateUser" />
+        <activity android:name=".UserDetails" />
+        <activity android:name=".Markets" />
+        <activity android:name=".messages" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

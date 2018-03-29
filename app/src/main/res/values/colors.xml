@@ -23,4 +23,7 @@
     <color name="red">#dfef0a25</color>
 
     <color name="blue">#01b8ea</color>
+
+    <color name="Lay">#ff5482</color>
+    <color name="Back">#fd2e94dc</color>
 </resources>

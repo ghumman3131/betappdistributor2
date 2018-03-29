@@ -50,8 +50,7 @@ public class ShowFragments extends Fragment {
     private RecyclerView recyclerView;
 
 
-    String saved_id,saved_disid, saved_name;
-
+    String saved_id, saved_disid, saved_name;
 
 
     public ShowFragments() {
@@ -67,7 +66,7 @@ public class ShowFragments extends Fragment {
 
 
         recyclerView = v.findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL , false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         blocked_id = new ArrayList<>();
         SharedPreferences sp = getActivity().getSharedPreferences("user_info", MODE_PRIVATE);
         saved_disid = sp.getString("distributor_id", "");
@@ -81,8 +80,7 @@ public class ShowFragments extends Fragment {
     }
 
 
-    private void get_data()
-    {
+    private void get_data() {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://www.lotusbook.com/api/exchange/eventType/4", new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
@@ -94,7 +92,7 @@ public class ShowFragments extends Fragment {
                     jsonArray = response.getJSONArray("result");
 
 
-                    Log.i("adapter to recycler --","");
+                    Log.i("adapter to recycler --", "");
                     Adapter adapter = new Adapter();
                     recyclerView.setAdapter(adapter);
 
@@ -111,11 +109,9 @@ public class ShowFragments extends Fragment {
             }
         });
 
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 ,2 ,2 ));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
-
-
 
 
     }
@@ -139,10 +135,13 @@ public class ShowFragments extends Fragment {
 
                 try {
 
-                    JSONArray event = response.getJSONArray("result");
-                    for (int i = 0; i < event.length(); i++) {
-                        blocked_id.add(event.getJSONObject(i).getString("event_id"));
+                    if (response.getString("result1").equals("done")) {
+                        JSONArray event = response.getJSONArray("result");
+                        for (int i = 0; i < event.length(); i++) {
+                            blocked_id.add(event.getJSONObject(i).getString("event_id"));
+                        }
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -165,12 +164,11 @@ public class ShowFragments extends Fragment {
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
-    private class Adapter extends RecyclerView.Adapter<view_holder>
-    {
+    private class Adapter extends RecyclerView.Adapter<view_holder> {
 
         @Override
         public view_holder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new view_holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.betting_cell , parent , false));
+            return new view_holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.betting_cell, parent, false));
         }
 
         @Override
@@ -196,6 +194,7 @@ public class ShowFragments extends Fragment {
                             try {
                                 Intent i = new Intent(getContext(), MatchOddDetails.class);
                                 i.putExtra("event_id", jsonObject.getString("id"));
+                                i.putExtra("open_date" , jsonObject.getString("openDate"));
                                 startActivity(i);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -215,6 +214,7 @@ public class ShowFragments extends Fragment {
                                         try {
                                             Intent i = new Intent(getContext(), MatchOddDetails.class);
                                             i.putExtra("event_id", jsonObject.getString("id"));
+                                            i.putExtra("open_date" , jsonObject.getString("openDate"));
                                             startActivity(i);
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -253,7 +253,7 @@ public class ShowFragments extends Fragment {
             }
         }
 
-            @Override
+        @Override
         public int getItemCount() {
             return jsonArray.length();
         }
@@ -365,28 +365,23 @@ public class ShowFragments extends Fragment {
     }
 
 
-
-
-    private class view_holder extends RecyclerView.ViewHolder
-    {
-        TextView match_vs , date_time , open_status,block_status;
+    private class view_holder extends RecyclerView.ViewHolder {
+        TextView match_vs, date_time, open_status, block_status;
         RelativeLayout cell_layout;
-        public view_holder(View itemView)
-        {
+
+        public view_holder(View itemView) {
             super(itemView);
-            cell_layout=itemView.findViewById(R.id.cell_layout);
+            cell_layout = itemView.findViewById(R.id.cell_layout);
             match_vs = itemView.findViewById(R.id.match_vs);
-            block_status=itemView.findViewById(R.id.block_status);
+            block_status = itemView.findViewById(R.id.block_status);
             date_time = itemView.findViewById(R.id.date_time);
             open_status = itemView.findViewById(R.id.open_status);
 
         }
     }
 
-    private String getDate(String OurDate)
-    {
-        try
-        {
+    private String getDate(String OurDate) {
+        try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000Z'");
             formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
             Date value = formatter.parse(OurDate);
@@ -396,9 +391,7 @@ public class ShowFragments extends Fragment {
             OurDate = dateFormatter.format(value);
 
             //Log.d("OurDate", OurDate);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             OurDate = "00-00-0000 00:00";
         }
         return OurDate;

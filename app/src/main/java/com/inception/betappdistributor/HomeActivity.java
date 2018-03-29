@@ -102,8 +102,10 @@ public class HomeActivity extends AppCompatActivity {
                 System.out.println(response);
 
                 try {
-                    JSONObject ob =response.getJSONObject("result");
-                    message.setText(ob.getString("message"));
+                    if(response.getString("result1").equals("done")) {
+                        JSONObject ob = response.getJSONObject("result");
+                        message.setText(ob.getString("message"));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -219,5 +221,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onResume();
 
         get_message();
+    }
+
+    public void settings(View view) {
+
+        drawerLayout.closeDrawer(Gravity.START);
+
+        startActivity(new Intent(HomeActivity.this , Settings.class));
     }
 }

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+    <RelativeLayout
+        android:id="@+id/lay_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile"
+            android:layout_centerHorizontal="true"
+            />
+
+
+
+
+
+        <ImageView
+            android:id="@+id/active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/name_txt"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/active_user" />
+
+        <TextView
+            android:id="@+id/name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_below="@+id/profile_img"
+            android:text="Name"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/d_grey"
+            android:textSize="20sp" />
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/pass_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay_user"
+        android:layout_margin="10dp"
+        android:background="@color/l_grey"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_lock_idle_lock" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/change_pass_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass_lay"
+        android:layout_margin="10dp"
+        android:background="@color/l_grey"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/chnge_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New password"
+            android:maxLines="1"
+            android:imeOptions="actionDone"/>
+
+        <Button
+            android:id="@+id/change_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Change Password"
+            android:textColor="@color/black"
+            android:onClick="change_pass"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/balance_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_img"
+        android:layout_marginTop="10dp"
+        android:background="@color/l_grey"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_match_fee" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Set Match Fee"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+    <LinearLayout
+        android:id="@+id/deposit_lay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance_lay"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Fee"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O per event"
+            android:background="@drawable/rounded_stroke"
+            android:padding="10dp"
+            android:id="@+id/current_fee"
+            android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance_lay"
+        android:layout_margin="30dp"
+        android:layout_toRightOf="@+id/deposit_lay"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Match Fee"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/zero_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 per event"
+            android:onClick="zero_fee"/>
+
+        <Button
+            android:id="@+id/fifty_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50 per event"
+            android:onClick="fifty_fee"/>
+
+        <Button
+            android:id="@+id/hundered_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 per event"
+            android:onClick="hundered_fee"/>
+
+        <Button
+            android:id="@+id/one_fifty_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150 per event"
+            android:onClick="one_fifty_fee"/>
+
+
+
+        <Button
+            android:id="@+id/two_hundered_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200 per event"
+            android:onClick="two_hundered_fee"/>
+
+        <Button
+            android:id="@+id/two_fifty_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="250 per event"
+            android:onClick="two_fifty_fee"/>
+
+        <Button
+            android:id="@+id/three_hundered_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="300 per event"
+            android:onClick="three_hundered_fee"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>

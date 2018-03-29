@@ -194,6 +194,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingLeft="20dp"
+            android:clickable="true"
+            android:onClick="settings"
             android:layout_marginTop="15dp">
 
             <ImageView

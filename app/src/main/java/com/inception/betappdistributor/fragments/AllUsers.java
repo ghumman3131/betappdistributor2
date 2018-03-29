@@ -131,6 +131,8 @@ public class AllUsers extends Fragment {
 
         try {
             jsonObject.put("module", "total_balance");
+            jsonObject.put("dis_id" ,  sp.getString("id", ""));
+
 
         } catch (JSONException e) {
             e.printStackTrace();

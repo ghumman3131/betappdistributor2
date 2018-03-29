@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="OPEN"
                 android:textSize="13sp"
-                android:background="@color/colorAccent"
+                android:background="@color/green"
                 android:textColor="@color/white"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
